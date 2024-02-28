@@ -9,13 +9,29 @@
 <a href="/trazenje" >
     <button type="button">Posetite Pretraga</button>
 </a>
-<div>
-    {% for x in content %}
-        <a href="/dogs/{{x}}">
-            <table>{{ x }}</table>
-        </a>
-    {% endfor %}
+
+<div id="searchHistory">
+
 </div>
+<script>
+function displayHistory() {
+    let history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+    let historyDiv = document.getElementById('searchHistory');
+    historyDiv.innerHTML = '<h2>Istorija pretrage:</h2>';
+    history.forEach(item => {
+        let link = document.createElement('a');
+        link.href = `/dogs/${item}`; // Pretpostavljam da ovo vodi do stranice sa detaljima o rasi
+        link.textContent = item;
+        let div = document.createElement('div');
+        div.appendChild(link);
+        historyDiv.appendChild(div);
+    });
+}
+
+window.onload = function() {
+    displayHistory();
+};
+</script>
 
 </body>
 </html>
