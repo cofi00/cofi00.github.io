@@ -11,24 +11,24 @@
     <input type="text" id="searchBox" autocomplete="off" placeholder="Unesite rasu...">
     <div id="suggestions"></div>
 
-    <!-- dsad -->
+    
 
 
     <script>
-        document.getElementById('searchBox').onkeyup = function() {
+  document.getElementById('searchBox').onkeyup = function() {
     var unos = this.value;
     if (unos.length > 1) {
         fetch(`/pretraga?q=${unos}`).then(response => response.json()).then(data => {
-            document.getElementById('suggestions').innerHTML = data.map(rasa => `<div><a href="/dogs/${rasa}">${rasa}</a></div>`).join('');
+            var suggestions = document.getElementById('suggestions');
+            suggestions.innerHTML = data.map(rasa => `<div><a href="/dogs/${rasa}" class="dog-link">${rasa}</a></div>`).join('');
 
-            // Čuvanje istorije pretrage u localStorage
-            let history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
-            if (!history.includes(unos)) {
-                history.push(unos);
-                if (history.length > 5) {
-                    history.shift(); // Remove the oldest search term
-                }
-                localStorage.setItem('searchHistory', JSON.stringify(history));
+            // Dodaj event listener na sve linkove
+            var links = suggestions.getElementsByClassName('dog-link');
+            for (var i = 0; i < links.length; i++) {
+                links[i].addEventListener('click', function(event) {
+                    var rasa = event.target.textContent;
+                    addToHistory(rasa);
+                });
             }
         });
     } else {
@@ -36,8 +36,20 @@
     }
 };
 
+function addToHistory(rasa) {
+    let history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+    if (!history.includes(rasa)) {
+        if (history.length >= 5) {
+            history.shift(); // Remove the oldest search term
+        }
+        history.push(rasa);
+        localStorage.setItem('searchHistory', JSON.stringify(history));
+    }
+}
+
 
        // setInterval(() => document.getElementById('timer').innerText += 1 , 1000)
     </script>
 </body>
 </html>
+
