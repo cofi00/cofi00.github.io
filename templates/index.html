@@ -15,7 +15,7 @@
 
 
     <script>
-    document.getElementById('searchBox').onkeyup = function() {
+  document.getElementById('searchBox').onkeyup = function() {
     var unos = this.value;
     if (unos.length > 0) {
         fetch(`/pretraga?q=${unos}`).then(response => response.json()).then(data => {
