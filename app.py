@@ -144,5 +144,5 @@ def Engleski_Mastif():
     return render_template('Engleski Mastif.html')
 
 if __name__ == '__main__':
-    app.run(debug=False,'0.0.0.0')
+    app.run(debug=False,host='0.0.0.0')
 
