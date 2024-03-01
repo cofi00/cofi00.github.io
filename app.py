@@ -7,7 +7,7 @@ rase_pasa = ["Bokser", "Labrador Retriver", "Nemački Ovčar", "Zlatni Retriver"
 
 
 
-@app.route('https://cofi00-github-io.onrender.com/')
+@app.route('/')
 def home():
     return render_template('home.html')
 
