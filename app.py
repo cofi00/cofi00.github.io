@@ -106,7 +106,7 @@ def Mops():
 @app.route('/dogs/Jorkširski Terijer')
 def Jorkširski_Terijer():
     
-    return render_template('Jorkširski Terije.html')
+    return render_template('Jorkširski Terijer.html')
 
 @app.route('/dogs/Border Koli')
 def Border_Koli():
