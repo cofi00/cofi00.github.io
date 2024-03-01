@@ -9,7 +9,7 @@ rase_pasa = ["Bokser", "Labrador Retriver", "Nemački Ovčar", "Zlatni Retriver"
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('Home.html')
 
 @app.route('/trazenje')
 def index():
