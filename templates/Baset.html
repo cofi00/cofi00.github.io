@@ -1,0 +1,69 @@
+{% extends 'Base.html' %}
+{% block head %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labrador Retriever Selection</title>
+    <style>
+        .button-image {
+          cursor: pointer;
+          transition: transform 0.3s ease;
+          width: 150px; /* Adjust the width as needed */
+          height: auto; /* Maintain aspect ratio */
+        }
+      
+        .button-image:hover {
+          transform: scale(1.1);
+        }
+      
+        .container {
+          text-align: center;
+        }
+      
+        button {
+          font-size: 20px; /* Increase font size */
+          padding: 10px 20px; /* Increase padding */
+          cursor: pointer;
+        }
+      </style>
+      
+    </head>
+{% endblock %}
+{% block body %}    
+<body>
+  <div class="container">
+    <h2>Which Labrador Retriever does your dog most look like?</h2>
+    
+    <!-- Yellow Labrador -->
+    <img src="https://images.yappy.com/yappicon/labradorretriever/labradorretriever-04.png" alt="Yellow Labrador" class="button-image" onclick="chooseColor('Yellow', 'https://en.wikipedia.org/wiki/Labrador_Retriever');">
+
+    <!-- Black Labrador -->
+    <img src="https://images.yappy.com/yappicon/labradorretriever/labradorretriever-03.png" alt="Black Labrador" class="button-image" onclick="chooseColor('Black', 'https://sr.wikipedia.org/sr-ec/Ruski_oligarsi');">
+    
+    <!-- Chocolate Labrador -->
+    <img src="https://images.yappy.com/yappicon/labradorretriever/labradorretriever-02.png" alt="Chocolate Labrador" class="button-image" onclick="chooseColor('Chocolate', 'https://en.wikipedia.org/wiki/Labrador_Retriever');">
+    <!-- Fox Red Labrador -->
+    <img src="https://images.yappy.com/yappicon/labradorretriever/labradorretriever-01.png" alt="Fox Red Labrador" class="button-image" onclick="chooseColor('Fox Red', 'https://en.wikipedia.org/wiki/Labrador_Retriever');">      
+    
+  </div>
+  
+</body>
+<script>
+function chooseColor(color, url) {
+  let selectedBreed = localStorage.getItem('selectedBreed');
+  if (selectedBreed) {
+      let history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+      let selection = { rasa: selectedBreed, boja: color, url: url };
+      history.push(selection);
+      localStorage.setItem('searchHistory', JSON.stringify(history));
+      window.location.href = url; 
+  } else {
+      alert('Molimo vas da prvo izaberete rasu.');
+  }
+}
+
+
+</script>
+
+
+{% endblock %}
