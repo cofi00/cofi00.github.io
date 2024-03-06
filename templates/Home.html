@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: start; 
+            min-height: 100vh; 
+        }
+        .top-bar {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: left;
+            width: 100%; 
+            box-sizing: border-box; 
+        }
+        .menu-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+        .centered-container {
+            text-align: center; 
+            width: 100%; 
+            padding: 20px; 
+            display: flex;  
+            flex-direction: column; 
+            align-items: center; 
+        }
+        .form-select, button {
+            width: 50%; 
+            padding: 10px;
+            margin-top: 10px; 
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button {
+            width: 50%;
+            background-color: #4CAF50; 
+            color: white;
+            border: none;
+            cursor: pointer;
+            
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .history-entry {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; 
+        }
+
+        .dog-image {
+            width: 50px; 
+            height: 50px;
+            margin-right: 10px; 
+            border-radius: 50%; 
+        }
+       
+        .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #f9f9f9;
+      min-width: 260px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="/" class="menu-button">Meni</a>
+    </div>
+
+    <div class="centered-container">
+        <a href="/trazenje" style="width: 90%; text-decoration: none;">
+            <button type="button">Posetite Pretragu</button>
+        </a>
+
+        
+    </div>
+    <div class="dropdown">
+        <span>Istorija</span>
+        <div class="dropdown-content" id="dog-history">
+          
+        </div>
+      </div>
+    <script>
+        function displayHistory() {
+  let history = JSON.parse(localStorage.getItem('searchHistory') || '[]');
+  let dropdown = document.getElementById('dog-history');
+
+  history.forEach(selection => {
+    let entryLink = document.createElement('a');
+    entryLink.href = selection.url;
+    entryLink.textContent = selection.rasa + ' - ' + selection.boja;
+    dropdown.appendChild(entryLink);
+
+    let entryImage = document.createElement('img');
+    entryImage.src = selection.imageUrl;
+    entryImage.alt = selection.rasa;
+    entryImage.style.width = '30px';  // Adjust the size as needed
+    entryLink.insertBefore(entryImage, entryLink.firstChild);
+  });
+}
+
+window.onload = displayHistory;
+
+
+    </script>
+
+
+   
+</html>
+
+
+
+
